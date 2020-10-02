@@ -9,12 +9,13 @@ services:
     build:
       context: .
       dockerfile: ./docker/web/Dockerfile
-    image: ted_web
+    image: searchx_web
     volumes:
       - .:/app
     depends_on:
-      - postgres
-      - elasticsearch
+      postgres:
+        condition: service_healthy
+      # - elasticsearch
     env_file: .env
     ports:
       - "8000:8000"
@@ -23,6 +24,11 @@ services:
   postgres:
     image: postgres:10.5
     env_file: .env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pgadmin -d ted"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
       - pgdata:/var/lib/postgresql/data
 

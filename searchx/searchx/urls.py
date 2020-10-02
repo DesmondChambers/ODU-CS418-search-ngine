@@ -1,7 +1,7 @@
-"""ted URL Configuration
+"""searchx URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.2/topics/http/urls/
+    https://docs.djangoproject.com/en/3.1/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -13,13 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+
+from register.views import register
+from login.views import login
+from home.views import home
 from django.contrib import admin
-from django.urls import path
-from talks.api.views import TalkList
-from talks.views import talk_list
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/talks/', TalkList.as_view()),
-    path('talks/', talk_list),
+    path('', home),
+    path('login/', login),
+    path('register/', register),
 ]
+
+# urlpatterns += staticfiles_urlpatterns(
