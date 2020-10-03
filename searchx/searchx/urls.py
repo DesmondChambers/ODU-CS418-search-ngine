@@ -15,6 +15,7 @@ Including another URLconf
 """
 
 
+from user.views import user
 from register.views import register
 from login.views import login
 from home.views import home
@@ -26,6 +27,8 @@ urlpatterns = [
     path('', home),
     path('login/', login),
     path('register/', register),
+    path('user/', user),
+    path('profile/', user),
 ]
 
 # urlpatterns += staticfiles_urlpatterns(
