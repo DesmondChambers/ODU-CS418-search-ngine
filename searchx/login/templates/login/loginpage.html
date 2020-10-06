@@ -7,9 +7,9 @@
             <div class="collapse navbar-collapse"
                 id="navbarResponsive">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'register' %}">register</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'about' %}">About</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'contact' %}">Contact</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/register">register</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -20,10 +20,14 @@
     <div class="jumbotron" style="padding: 64px 32px;margin: 0px;">
         <div class="container login-card"><img class="profile-img-card" src="{% static 'assets/img/avatar_2x.png' %}">
             <p class="profile-name-card"> </p>
-            <form class="form-signin"><span class="reauth-email"> </span><input class="form-control" type="email" id="inputEmail" required="" placeholder="Email address" autofocus=""><input class="form-control" type="password" id="inputPassword" required="" placeholder="Password">
-                <div
-                    class="checkbox">
+            <form class="form-signin">
+            <form method="POST" action="">
+						{% csrf_token %}
+                <span class="reauth-email"> </span>
+                    <input class="form-control" type="email" id="inputEmail" required="" placeholder="Email address" autofocus="">
+                    <input class="form-control" type="password" id="inputPassword" required="" placeholder="Password">
+                <div class="checkbox">
                     <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Remember me</label></div>
         </div><button class="btn btn-primary btn-block btn-lg btn-signin" type="submit">Sign in</button></form><a class="forgot-password" href="#">Forgot your password?</a></div>
-    </div
-    {% endblock %}%
+    </div>
+    {% endblock %}

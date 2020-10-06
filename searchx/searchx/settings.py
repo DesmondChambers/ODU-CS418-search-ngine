@@ -40,10 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_elasticsearch_dsl',
     'rest_framework',
-    'home',
-    'login',
-    'register',
-    'user',
+    'home.apps.HomeConfig',
+    'login.apps.LoginConfig',
+    'user.apps.UserConfig',
+    'register.apps.RegisterConfig',
 ]
 
 MIDDLEWARE = [
