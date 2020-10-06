@@ -1,4 +1,3 @@
-  
 from django.shortcuts import render, redirect 
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
@@ -10,7 +9,8 @@ from user.models import *
 from register.forms import UserResgisterForm
 
 # Create your views here.
+
 @login_required(login_url='/login')
-def user (request):
-    # return HttpResponse('home')
-    return render(request, 'user/user.html')
+def profile (request):
+    #return HttpResponse('test')
+    return render(request, 'profilePage/profile.html')
