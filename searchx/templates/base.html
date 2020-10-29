@@ -24,18 +24,11 @@
 </head>
 
 <body id="page-top">
-    {% block Navbar %}
-    {% endblock Navbar %}
-    {% if messages %}
-        {%for message in messages %}
-            <div class="alert alert-{{message.tags}}">
-                {{message}}
-            </div>
-        {% endfor %}
-    {% endif %}
-    {% block content %}
-
-    {% endblock %}
+    {% block Navbar %} {% endblock Navbar %} {% if messages %} {%for message in messages %}
+    <div class="alert alert-{{message.tags}}">
+        {{message}}
+    </div>
+    {% endfor %} {% endif %} {% block content %} {% endblock %}
 
     <footer class="footer text-center">
         <div class="container">
@@ -63,20 +56,20 @@
     <div class="copyright py-4 text-center text-white">
         <div class="container"><small>Copyright © Desmond Chambers 2020</small></div>
     </div>
-    	<script>
+    <script>
+        //Query All input fields
+        //var form_fields = document.getElementsByTagName('input')
+        //form_fields[1].placeholder = 'Username..';
+        //form_fields[2].placeholder='First name...';
+        //form_fields[3].placeholder='Last name...';
+        //form_fields[2].placeholder = '...';
+        //form_fields[3].placeholder = 'enter Password...';
+        //form_fields[4].placeholder = 'Re-enter Password...';
 
-		//Query All input fields
-		var form_fields = document.getElementsByTagName('input')
-		form_fields[1].placeholder='Username..';
-		form_fields[2].placeholder='Email..';
-		form_fields[3].placeholder='Enter password...';
-		form_fields[4].placeholder='Re-enter Password...';
-
-
-		for (var field in form_fields){	
-			form_fields[field].className += ' form-control'
-		}
-	</script>
+        // for (var field in form_fields) {
+        // form_fields[field].className += ' form-control'
+        // }
+    </script>
     <script src="{% static 'assets/js/jquery.min.js' %}"></script>
     <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'assets/js/bs-init.js' %}"></script>

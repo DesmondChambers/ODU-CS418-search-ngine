@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'login.apps.LoginConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +42,6 @@ INSTALLED_APPS = [
     'django_elasticsearch_dsl',
     'rest_framework',
     'home.apps.HomeConfig',
-    'login.apps.LoginConfig',
     'user.apps.UserConfig',
     'register.apps.RegisterConfig',
     'profilePage.apps.ProfilepageConfig',
@@ -155,3 +155,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECTED_URL = '/user'
+
+#LOGOUT_REDIRECT_URL = 'login/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  
+MAILER_EMAIL_BACKEND = EMAIL_BACKEND 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'jam2bklyn@gmail.com'
+EMAIL_HOST_PASSWORD = '1Daliah!!'
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

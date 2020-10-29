@@ -1,33 +1,32 @@
-{% extends "base.html" %}
-{% load static %}
-    {% block Navbar %}
-    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
-        <div class="container"><a class="navbar-brand" href="login.html">search-x&nbsp;<img data-bs-hover-animate="bounce" src="{% static 'assets/img/world.png' %}" width="60" height="100" style="width: 44px;height: 25px;margin: 0px 0px 0px 1px;"></a><button data-toggle="collapse" data-target="#navbarResponsive"
-                class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
-            <div class="collapse navbar-collapse"
-                id="navbarResponsive">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/profile">{{user.username}}-profile</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">contact</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/logout">logout</a></li>
-                </ul>
-            </div>
+{% extends "base.html" %} {% load static %} {% block Navbar %}
+<nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
+    <div class="container"><a class="navbar-brand" href="/">search-x&nbsp;<img data-bs-hover-animate="bounce" src="{% static 'assets/img/world.png' %}" width="60" height="100" style="width: 44px;height: 25px;margin: 0px 0px 0px 1px;"></a><button data-toggle="collapse" data-target="#navbarResponsive"
+            class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/profile">{{user.username}}    profile</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">contact</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/logout">logout</a></li>
+            </ul>
         </div>
-    </nav>
-    {% endblock %}
-
-    {% block content %}
-    <div class="jumbotron" style="padding: 64px 32px;margin: 0px;">
-        <div class="row" style="margin: 200px 0px;">
-            <div class="col-md-10 offset-md-1">
-                <div class="card m-auto" style="max-width:850px">
-                    <div class="card-body">
-                        <form class="d-flex align-items-center"><i class="fas fa-search d-none d-sm-block h4 text-body m-0"></i><input class="form-control form-control-lg flex-shrink-1 form-control-borderless" type="search" placeholder="Search topics or keywords" name="searchbar"><button class="btn btn-success btn-lg"
-                                type="submit">Search</button></form>
-                    </div>
-                    
+    </div>
+</nav>
+{% endblock %} {% block content %}
+<div class="jumbotron" style="padding: 64px 32px;margin: 0px;">
+    <div class="row" style="margin: 200px 0px;">
+        <div class="col-md-10 offset-md-1">
+            <div class="card m-auto" style="max-width:850px">
+                <div class="card-body">
+                    <form class="d-flex align-items-center"><i class="fas fa-search d-none d-sm-block h4 text-body m-0"></i><input class="form-control form-control-lg flex-shrink-1 form-control-borderless" type="search" placeholder="Search topics or keywords" name="searchbar"><button class="btn btn-success btn-lg"
+                            type="submit">Search</button></form>
                 </div>
+                <!-- Insert your own Programmable Search Engine ID here -->
+                <script async src="https://cse.google.com/cse.js?cx=017643444788069204610:4gvhea_mvga"></script>
+
+                <div class="gcse-search"></div>
+
             </div>
         </div>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}

@@ -1,37 +1,53 @@
-{% extends "base.html" %}
-{% load static %}
-    {% block Navbar %}
-    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
-        <div class="container"><a class="navbar-brand" href="login.html">search-x&nbsp;<img data-bs-hover-animate="bounce" src="{% static 'assets/img/world.png' %}" width="60" height="100" style="width: 44px;height: 25px;margin: 0px 0px 0px 1px;"></a><button data-toggle="collapse" data-target="#navbarResponsive"
-                class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
-            <div class="collapse navbar-collapse"
-                id="navbarResponsive">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/login">login</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a></li>
-                </ul>
-            </div>
+{% extends "base.html" %} {% load static %} {% block Navbar %}
+<nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
+    <div class="container"><a class="navbar-brand" href="/">search-x&nbsp;<img data-bs-hover-animate="bounce" src="{% static 'assets/img/world.png' %}" width="60" height="100" style="width: 44px;height: 25px;margin: 0px 0px 0px 1px;"></a><button data-toggle="collapse" data-target="#navbarResponsive"
+            class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/login">login</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a></li>
+            </ul>
         </div>
-    </nav>
-    {% endblock %}
-
-    {% block content %}
-    <div class="register-photo" style="margin: 100px 0px 0px 0px;">
-        <div class="form-container">
-            <div class="image-holder" style="background: url(&quot;assets/img/kiddy-up-reg.png&quot;);"></div>
-                <form method="post">
+    </div>
+</nav>
+{% endblock %} {% block content %}
+<div class="jumbotron" style="padding: 64px 32px;margin: 0px;">
+    <div class="container login-card"><img class="profile-img-card" src="{% static 'assets/img/avatar_2x.png' %}">
+        <p class="profile-name-card"> </p>
+        <form method="post">
+            {% csrf_token %} {% for field in form %}
+            <p>
+                {{ field.label_tag }}<br> {{ field }} {% if field.help_text %}
+                <small style="display: none">{{ field.help_text }}</small> {% endif %} {% for error in field.errors %}
+                <p style="color: red">{{ error }}</p>
+                {% endfor %}
+            </p>
+            {% endfor %}
+            <button type="submit">Sign up</button>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                already have an Account? <a class="ml-2" href="/register">Sign in</a>
+            </small>
+        </div>
+    </div>
+</div>
+<!--div class="jumbotron" style="padding: 130px 32px;margin: 0px;"
+        <form class="needs-validation" novalidate>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
                     {% csrf_token %}
-                        <h2 class="text-center"><strong>Create</strong> an account.</h2>
-                        {{ form.as_p }}
-                    <div class="form-check"><label class="form-check-label"><input class="form-check-input" type="checkbox">I agree to the license terms.</label></div>  
-                  
-                    <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Sign Up</button></div>
+                    <fieldset class="form-group"
+                    <h2 class="text-center"><strong>Create</strong> an account.</h2>
+                    {{ form.as_p }}
+                    </fieldset>
+                    <button class="btn btn-primary" type="submit">Submit form</button>
+                    </br>
                     <a class="already" href="/login">You already have an account? Login here.</a>
-                
-                </form>>   
+                </div>
             </div>
-        </div>
+        </form>
     </div>
     <!--div class="content-section">
         <form method="post">
@@ -46,4 +62,4 @@
         </form>
     </div-->
 
-    {% endblock %}
+{% endblock %}

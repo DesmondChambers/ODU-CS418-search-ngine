@@ -31,5 +31,5 @@ def loginpage(request):
 		return render(request, 'login/loginpage.html', context)
 
 def logoutUser(request):
-	logout(request)
-	return redirect('/login')
+	authenticate.logout(request)
+	return redirect('/')
