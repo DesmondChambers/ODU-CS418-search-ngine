@@ -28,5 +28,6 @@ def home (request):
        amount = results.hits.total.value
     else:
         search = ''
+        total = 0
 
     return render(request, 'home/index.html', {'search': search, 'total': total,})

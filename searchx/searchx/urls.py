@@ -16,19 +16,20 @@ Including another URLconf
 from profilePage.views import profile
 from user.views import user
 from register.views import register
-from login.views import login
+from login.views import logoutUser, login
 from home.views import home
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from django.contrib.auth import logout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home),
-    #path('login/', login),
+    #path('login/', loginpage),
     path('login/', auth_views.LoginView.as_view(template_name='login/loginpage.html'), name='login'),
-    #path('logout/', login),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('logout/', logoutUser),
+    #path('logout/', auth_views.LogoutView.as_view(), name='logoutUser'),
     path('register/', register),
     path('user/', user),
     path('profile/', profile),
