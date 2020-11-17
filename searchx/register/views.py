@@ -32,10 +32,21 @@ def register (request):
     if request.method == 'POST':
         form = UserResgisterForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}')
-            return redirect ('/user')
+            recaptcha_response = request.POST.get('g-recaptcha-response')
+            url = 'https://www.google.com/recaptcha/api/siteverify'
+            values = {
+                'secret' : settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+                'response': recaptcha_response
+                }
+            data = urllib.parse.urlencode(values).encode()
+            req = urllib.request.Request(url, data=data)
+            response = urllib.request.urlopen(req)
+            result = json.loads(response.read().decode())
+            if result['success']:
+                form.save()
+                username = form.cleaned_data.get('username')
+                messages.success(request, f'Account created for {username}')
+                return redirect ('/user')
     else:
         form = UserResgisterForm()
     return render(request, 'register/register.html', {'form': form})
