@@ -1,3 +1,4 @@
+from home.models import Search
 from django.shortcuts import render, redirect 
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
@@ -12,4 +13,10 @@ from user.models import *
 @login_required(login_url='/login')
 def profile (request):
     #return HttpResponse('test')
-    return render(request, 'profilePage/profile.html')
+    search = Search.objects.all()
+
+    context = {
+        'search':search,
+
+        }
+    return render(request, 'profilePage/profile.html', context)

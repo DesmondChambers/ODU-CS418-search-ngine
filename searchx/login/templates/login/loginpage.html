@@ -5,6 +5,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/register">register</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/login/password_reset_form.html">Reset Password</a></li>
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a></li>
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a></li>
             </ul>
@@ -15,12 +16,16 @@
 <div class="jumbotron" style="padding: 64px 32px;margin: 0px;">
     <div class="container login-card"><img class="profile-img-card" src="{% static 'assets/img/avatar_2x.png' %}">
         <p class="profile-name-card"> </p>
-        <form class="form-signin" method="POST" action="">
+        <form action="/login/" class="form-signin" method="POST" action="">
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Log In</legend>
                 {{ form.as_p }}
             </fieldset>
+            {% block javascript %}
+            <script src='https://www.recaptcha.net/recaptcha/api.js'></script>
+            {% endblock %}
+            <div class="g-recaptcha" data-sitekey="6LdGWuMZAAAAAO1mqHyGS-7CksCh1P-3oE1hcneQ"></div>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Login</button>
             </div>

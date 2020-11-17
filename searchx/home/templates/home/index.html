@@ -1,4 +1,9 @@
-{% extends "base.html" %} {% load static %} {% block Navbar %}
+{% extends "base.html" %} {% load static %} {% block Navbar %} {% load search_tags %}
+<style>
+    .highlight {
+        background-color: yellow;
+    }
+</style>
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
     <div class="container"><a class="navbar-brand" href="/">search-x&nbsp;<img class="bounce animated" src="{% static 'assets/img/world.png' %}" width="60" height="100" style="width: 44px;height: 25px;margin: 0px 0px 0px 1px;"></a><button data-toggle="collapse" data-target="#navbarResponsive"
             class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
@@ -19,14 +24,14 @@
             <div class="card m-auto" style="max-width:850px">
                 <div class="card-body">
                     <form method='GET' class="d-flex align-items-center">
-                        <i class="fas fa-search d-none d-sm-block h4 text-body m-0">
+                        <i class="fas fa-search d-none d-sm-block h4 text-body m-0">{% csrf_token %}
                             
-                        </i><input id='q' class="form-control form-control-lg flex-shrink-1 form-control-borderless" type="search" placeholder="Search topics or keywords" name="q">
+                        </i><input id='q' class="form-control form-control-lg flex-shrink-1 form-control-borderless" type="text" placeholder="Search topics or keywords" name="q">
 
-                        <button class="btn btn-success btn-lg" type="submit">Search</button></form>
+                        <button onclick="highlight(q)" class="btn btn-success btn-lg" type="submit">Search</button></form>
 
                     <div class="dropdown">
-                        <form method='GET'>
+                        <form method=' GET '>
                             <label for="fname">Advance Search</label><br>
                             <input type="text" id="title" name="title" placeholder="title"><br>
                             <input type="text" id="author" name="author" placeholder="author">
@@ -41,19 +46,90 @@
         </div>
 
     </div>
-    <p>Returned {{total}} documents</p>
-    <div> {% for item in search %}
+    <p>{{countval}} results</p>
+    <b>Searchterm :{{q}}
+    <div class="highlightarea" > {% for item in search %}
         <p></p>
         <hr>
-        <h5>Author: {{item.contributor_author}}</h5>
-        <h4>Title:
-            <a href="{{item.identifier_uri}}">{{item.title}}</a>
+        <h5>Author: {{item.contributor_author|highlight:q}}</h5>
+        <h4 id="inputText">Title:
+            <a id="inputText" href="{{item.identifier_uri}}">{{item.title|highlight:q}}</a>
         </h4>
-        Discription: {{item.description_abstract}}
-        <br> {% endfor %}
+        <p id="inputText">{{item.description_abstract|highlight:q}}</p>
+        <br>
+        {% if request.user.is_authenticated %}  
+        <button type="submit" class="btn btn-default btn-sm" value="POST">
+          <span class="glyphicon glyphicon-floppy-saved"></span> Save
+        </button>
+        {% endif %}
+         {% endfor %}
 
     </div>
-</div>
+    <div> {% for item in Advsearch %}
+        <p></p>
+        <hr>
+        <h5>Author: {{item.contributor_author|highlight:q}}</h5>
+        <h4>Title:
+            <a href="{{item.identifier_uri}}">{{item.title|highlight:q}}</a>
+        </h4>
+        Discription: {{item.description_abstract|highlight:q}}
+        <br> 
+        {% if request.user.is_authenticated %}  
+        <button type="submit" class="btn btn-default btn-sm" value="POST">
+          <span class="glyphicon glyphicon-floppy-saved"></span> Save
+        </button>
+        {% endif %}
+        {% endfor %}
 
+    </div>
+    <nav aria-label="Page Navigation">
+        <ul class="pagination">
+            <li class="page-item">
+                {% if search.has_previous %}
+                <a class="page-link" href="?q={{q}}&page={{search.previous_page_number}}">Previous</a> {% endif %}
+
+            </li>
+            <li class="page-item">
+                <a class="page-link">Page {{search.number}} of {{search.paginator.num_pages}}</a>
+            </li>
+            <li class="page-item">
+                {% if search.has_next %}
+                <a class="page-link" href="?q={{q}}&page={{search.next_page_number}}">Next</a> {% endif %}
+            </li>
+        </ul>
+    </nav>
+</div>
+<script src="jquery.min.js"></script>
+<script src="jquery.highlight.js"></script>
+<script>
+    function highlight(text) {
+        var inputText = document.getElementById("inputText");
+        var innerHTML = inputText.innerHTML;
+        var index = innerHTML.indexOf(text);
+        if (index >= 0) { 
+         innerHTML = innerHTML.substring(0,index) + "<span class='highlight '>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
+         inputText.innerHTML = innerHTML;
+        }
+      }
+      $('.highlightarea').highlight(['test', 'the']);
+
+
+      $(document).ready(function(){
+        $("#q").keyup(function(){
+          searchHighlight($(this).val());
+         });
+      });
+
+      function searchHighlight(searchText)
+      {
+        if (searchText)
+        {
+            var content = $("p").text();
+            var SearchExp = new RegExp(searchText, "ig");
+            var matches = content.match(searchExp);
+            alert(matches);
+        }
+      }
+</script>
 
 {% endblock %}

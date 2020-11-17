@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'register.apps.RegisterConfig',
     'profilePage.apps.ProfilepageConfig',
+    #'recaptcha',
 ]
 
 MIDDLEWARE = [
@@ -166,3 +167,9 @@ EMAIL_HOST_USER = 'jam2bklyn@gmail.com'
 EMAIL_HOST_PASSWORD = '1Daliah!!'
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LdGWuMZAAAAALvFLQ6nuYY3_se-YsUMiab49I1x'
+RECAPTCHA_PRIVATE_KEY = '6LdGWuMZAAAAALvFLQ6nuYY3_se-YsUMiab49I1x'
+RECAPTCHA_PUBLIC_KEY = '6LdGWuMZAAAAAO1mqHyGS-7CksCh1P-3oE1hcneQ'
+NOCAPTCHA = True

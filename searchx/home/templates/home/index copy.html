@@ -1,0 +1,70 @@
+{% extends "base.html" %} {% load static %} {% block Navbar %}
+<nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
+    <div class="container"><a class="navbar-brand" href="/">search-x&nbsp;<img class="bounce animated" src="{% static 'assets/img/world.png' %}" width="60" height="100" style="width: 44px;height: 25px;margin: 0px 0px 0px 1px;"></a><button data-toggle="collapse" data-target="#navbarResponsive"
+            class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/register">register</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/login">login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% endblock %} {% block content %}
+<div class="jumbotron" style="padding: 64px 32px;margin: 0px;">
+    <div class="row" style="margin: 200px 0px;">
+        <div class="col-md-10 offset-md-1">
+            <div class="card m-auto" style="max-width:850px">
+                <div class="card-body">
+                    <form method='GET' class="d-flex align-items-center">
+                        <i class="fas fa-search d-none d-sm-block h4 text-body m-0">
+                            
+                        </i><input id='q' class="form-control form-control-lg flex-shrink-1 form-control-borderless" type="search" placeholder="Search topics or keywords" name="q">
+
+                        <button class="btn btn-success btn-lg" type="submit">Search</button></form>
+
+                    <div class="dropdown">
+                        <form method='GET'>
+                            <label for="fname">Advance Search</label><br>
+                            <input type="text" id="title" name="title" placeholder="title"><br>
+                            <input type="text" id="author" name="author" placeholder="author">
+                            <br>
+                            <input type="submit" value="Submit">
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <p>Returned {{countval}} documents</p>
+    <div> {% for item in search %}
+        <p></p>
+        <hr>
+        <h5>Author: {{item.contributor_author}}</h5>
+        <h4>Title:
+            <a href="{{item.identifier_uri}}">{{item.title}}</a>
+        </h4>
+        Discription: {{item.description_abstract}}
+        <br> {% endfor %}
+
+    </div>
+    <div> {% for item in Advsearch %}
+        <p></p>
+        <hr>
+        <h5>Author: {{item.contributor_author}}</h5>
+        <h4>Title:
+            <a href="{{item.identifier_uri}}">{{item.title}}</a>
+        </h4>
+        Discription: {{item.description_abstract}}
+        <br> {% endfor %}
+
+    </div>
+</div>
+
+
+{% endblock %}
