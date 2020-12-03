@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Search, Searchsave, History
+from .models import Search, Searchsave, History, Resultsave
 
 # Register your models here.
 
@@ -11,4 +11,6 @@ admin.site.register(Search, SearchAdmin)
 admin.site.register(Searchsave)
 
 admin.site.register(History)
+
+admin.site.register(Resultsave)
 

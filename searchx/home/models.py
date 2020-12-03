@@ -49,3 +49,11 @@ class Searchsave(models.Model):
 
     class Meta:
         verbose_name_plural = 'Searchsave'
+
+class Resultsave(models.Model):
+    username =  models.TextField(blank=True, null=True)
+    title = models.TextField(blank=True, null=True)
+    relation_haspart=models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return "%s viewed: %s" %(self.title, self.relation_haspart)

@@ -48,11 +48,28 @@
                 <td>{{user.email}}</td>
             </tr>
             <tr>
-                <td>Passworde</td>
-                <td>Name</td>
+                <td>Password</td>
+                <td>******</td>
             </tr>
 
         </table><br>
+        <h2>Saved Search</h2>
+
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Delete</th>
+            </tr>
+            {% for item in new %}
+
+            <tr>
+                <td><a href="http://hdl.handle.net/10919/28435" target="type=URL" & "LD5655.V856_1992.B377.pdf">{{ item.title }}</a></td>
+                <td><a href="{% url 'favorite_add' item.title %}" class="btn btn-outline-primary">Unsave</a></td>
+            </tr>
+
+            {% endfor %}
+        </table><br>
+
         <h2>Search History</h2>
 
         <table>
@@ -68,6 +85,7 @@
             {% endfor %}
 
         </table>
+
 
 
         <div class="row">

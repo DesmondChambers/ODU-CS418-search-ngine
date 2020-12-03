@@ -1,5 +1,5 @@
-from home.models import History, Searchsave
-from django.http.response import HttpResponse
+from home.models import History, Resultsave, Searchsave
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .documents import searchDocument
 #from .filters import SearchFilter
@@ -129,6 +129,29 @@ class SearchResults(LazyObject):
         if isinstance(index, slice):
             search_results = list(search_results)
         return search_results
+
+def favorite_add(request,title):
+    #a = Resultsave.objects.get(username=User.get_username(request.user),title=title)
+    if Resultsave.objects.filter(username=User.get_username(request.user),title=title).exists():
+        r = Resultsave.objects.filter(username=User.get_username(request.user),title=title).delete()
+        saved = False
+    else:
+        r = Resultsave.objects.create(username=User.get_username(request.user),title=title)
+        r.save()
+        saved = True
+    return HttpResponseRedirect(request.META['HTTP_REFERER'],saved)
+
+def adsearch(request):
+
+    searchixs="add"
+    countval=0
+    context = {
+            'searchixs':searchixs,
+            'countval':countval
+            
+
+            }
+    return render(request, 'search/adsearch.html',context,countval)
 
 
 
